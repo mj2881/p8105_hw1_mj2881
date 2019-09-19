@@ -370,12 +370,12 @@ summary {
 
 
 <pre class="r"><code>library(tidyverse)</code></pre>
-<pre><code>## ── Attaching packages ───────────────────────── tidyverse 1.2.1 ──</code></pre>
+<pre><code>## ── Attaching packages ────────────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
 <pre><code>## ✔ ggplot2 3.2.1     ✔ purrr   0.3.2
 ## ✔ tibble  2.1.3     ✔ dplyr   0.8.3
 ## ✔ tidyr   0.8.3     ✔ stringr 1.4.0
 ## ✔ readr   1.3.1     ✔ forcats 0.4.0</code></pre>
-<pre><code>## ── Conflicts ──────────────────────────── tidyverse_conflicts() ──
+<pre><code>## ── Conflicts ───────────────────────────────────────────────────────────── tidyverse_conflicts() ──
 ## ✖ dplyr::filter() masks stats::filter()
 ## ✖ dplyr::lag()    masks stats::lag()</code></pre>
 <div id="problem-1" class="section level1">
@@ -391,10 +391,27 @@ summary {
 </ul>
 <pre class="r"><code>one_df = tibble(
   sample = rnorm(8),
-  gr_th_0 = sample &gt; 0,
-  chr_vector = character(8),
-  
+  vec_logical = sample &gt; 0,
+  chr_vector = c('a','b','c','d','e','f','g','h'),
+  vec_factor = factor(c(&quot;big&quot;,&quot;med&quot;,&quot;small&quot;,&quot;big&quot;,&quot;med&quot;,&quot;small&quot;,&quot;big&quot;,&quot;small&quot;))
 )</code></pre>
+<p>Try to take the mean of each variable in your dataframe. What works and what doesn’t?</p>
+<pre class="r"><code>mean(pull(one_df, sample))</code></pre>
+<pre><code>## [1] 0.009524413</code></pre>
+<pre class="r"><code>mean(pull(one_df, vec_logical))</code></pre>
+<pre><code>## [1] 0.375</code></pre>
+<pre class="r"><code>mean(pull(one_df, chr_vector))</code></pre>
+<pre><code>## Warning in mean.default(pull(one_df, chr_vector)): argument is not numeric
+## or logical: returning NA</code></pre>
+<pre><code>## [1] NA</code></pre>
+<pre class="r"><code>mean(pull(one_df,vec_factor))</code></pre>
+<pre><code>## Warning in mean.default(pull(one_df, vec_factor)): argument is not numeric
+## or logical: returning NA</code></pre>
+<pre><code>## [1] NA</code></pre>
+<p>It works to take the mean of a random sample and a logical vector. However, it doesn’t work to take a mean of a character vector or a factor vector.</p>
+</div>
+<div id="code-chunk-2" class="section level2">
+<h2>code chunk 2</h2>
 </div>
 </div>
 
