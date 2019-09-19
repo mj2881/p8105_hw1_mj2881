@@ -1,7 +1,7 @@
 ---
 title: "Homework 1"
 author: "Michelle Jen"
-date: "9/17/2019"
+date: "9/18/2019"
 output: html_document
 ---
 ```{r}
@@ -33,7 +33,7 @@ one_df = tibble(
 
 Try to take the mean of each variable in your dataframe. What works and what doesn’t?
 
-```{r}
+```{r means}
 mean(pull(one_df, sample))
 
 mean(pull(one_df, vec_logical))
@@ -43,7 +43,7 @@ mean(pull(one_df, vec_character))
 mean(pull(one_df,vec_factor))
 ```
 
-It works to take the mean of a random sample (mean = -0.4653526) and a logical vector (mean = 0.375). However, it doesn't work to take a mean of a character vector or a factor vector since they're not numeric or logical. 
+It works to take the mean of a random sample and a logical vector. However, it doesn't work to take a mean of a character vector or a factor vector since they're not numeric or logical. 
 
 
 ## code chunk 2
@@ -54,19 +54,17 @@ In a second code chunk:
 * convert the logical vector to a factor, and multiply the random sample by the result
 * convert the logical vector to a factor and then convert the result to numeric, and multiply the random sample by the result
 
-```{r}
+```{r problem 2}
 log_num = as.numeric(pull(one_df,vec_logical))
 product_num = log_num*pull(one_df, sample)
 
 log_fact = as.factor(pull(one_df, vec_logical))
-product_fact = log_fact*pull(one_df, sample)
+product_fact = log_fact*pull(one_df, sample) # ‘*’ not meaningful for factors. This makes sense since the factor vector did not yield a mean.#
 
 fact_num = as.numeric(log_fact)
 product_num_random = fact_num*pull(one_df, sample)
 
 ```
-
-For the second bullet, finding the product of the factor vactor and random sample yields the result: ‘*’ not meaningful for factors. This makes sense since the factor vector is not numeric so it doesn't work to take the mean.
 
 # Problem 2
 
@@ -78,5 +76,39 @@ Create a data frame comprised of:
 * A numeric vector created by coercing the above logical vector
 * A factor vector created by coercing the above logical vector
 
+```{r}
+two_df = tibble(
+  x = rnorm(500),
+  y = rnorm(500),
+  log_vector = x + y > 1,
+  num_vector = as.numeric(log_vector),
+  fact_vector = as.factor(log_vector),
+)
+  
+```
 
+* the size of the dataset (using nrow and ncol) 
+* the mean, median, and standard deviation of x 
+* the proportion of cases for which x + y > 1
+
+```{r}
+nrow(two_df) # The nrow = 500. #
+ncol(two_df) # The ncol = 5. #
+
+mean(pull(two_df, x))
+median(pull(two_df, x))
+sd(pull(two_df, x))
+
+
+```
+
+
+
+Make a scatterplot of y vs x; color points using the logical variable (adding color = ... inside of aes in your ggplot code should help). Make a second and third scatterplot that color points using the numeric and factor variables, respectively, and comment on the color scales.
+
+```{r}
+ggplot(two_df, aes (x=x, y=y, color = (log_vector))) + geom_point()
+ggsave
+
+```
 
