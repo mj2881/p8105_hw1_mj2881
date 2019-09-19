@@ -25,7 +25,7 @@ Create a data frame comprised of:
 one_df = tibble(
   sample = rnorm(8),
   vec_logical = sample > 0,
-  chr_vector = c('a','b','c','d','e','f','g','h'),
+  vec_character = c('a','b','c','d','e','f','g','h'),
   vec_factor = factor(c("big","med","small","big","med","small","big","small"))
 )
 
@@ -38,27 +38,35 @@ mean(pull(one_df, sample))
 
 mean(pull(one_df, vec_logical))
 
-mean(pull(one_df, chr_vector))
+mean(pull(one_df, vec_character))
 
 mean(pull(one_df,vec_factor))
 ```
 
-It works to take the mean of a random sample and a logical vector. However, it doesn't work to take a mean of a character vector or a factor vector since they're not numeric or logical. 
+It works to take the mean of a random sample (mean = -0.4653526) and a logical vector (mean = 0.375). However, it doesn't work to take a mean of a character vector or a factor vector since they're not numeric or logical. 
 
 
 ## code chunk 2
 
-as.numeric function to the logical, character, and factor variables
+In a second code chunk:
+
+* convert the logical vector to numeric, and multiply the random sample by the result
+* convert the logical vector to a factor, and multiply the random sample by the result
+* convert the logical vector to a factor and then convert the result to numeric, and multiply the random sample by the result
 
 ```{r}
 log_num = as.numeric(pull(one_df,vec_logical))
-product_log = log_num*pull(one_df, sample)
+product_num = log_num*pull(one_df, sample)
 
-log
+log_fact = as.factor(pull(one_df, vec_logical))
+product_fact = log_fact*pull(one_df, sample)
+
+fact_num = as.numeric(log_fact)
+product_num_random = fact_num*pull(one_df, sample)
 
 ```
 
-
+For the second bullet, finding the product of the factor vactor and random sample yields the result: ‘*’ not meaningful for factors. This makes sense since the factor vector is not numeric so it doesn't work to take the mean.
 
 # Problem 2
 
