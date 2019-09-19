@@ -24,9 +24,9 @@ Create a data frame comprised of:
 
 one_df = tibble(
   sample = rnorm(8),
-  gr_th_0 = sample > 0,
-  chr_vector = character(length=8),
-  fact_vector = 
+  vec_logical = sample > 0,
+  chr_vector = c('a','b','c','d','e','f','g','h'),
+  vec_factor = factor(c("big","med","small","big","med","small","big","small"))
 )
 
 ```
