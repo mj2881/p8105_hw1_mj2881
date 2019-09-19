@@ -1,8 +1,8 @@
 ---
 title: "Homework 1"
 author: "Michelle Jen"
-date: "9/18/2019"
-output: github_document
+date: "9/19/2019"
+output: html_document
 ---
 ```{r}
 library(tidyverse)
@@ -31,11 +31,8 @@ Try to take the mean of each variable in your dataframe. What works and what doe
 
 ```{r means}
 mean(pull(one_df, sample))
-
 mean(pull(one_df, vec_logical))
-
 mean(pull(one_df, vec_character))
-
 mean(pull(one_df,vec_factor))
 ```
 It works to take the mean of a random sample and a logical vector. However, it doesn't work to take a mean of a character vector or a factor vector since they're not numeric or logical. 
@@ -91,18 +88,18 @@ mean(pull(two_df, x))
 median(pull(two_df, x))
 sd(pull(two_df, x))
 
-
+sum(pull(two_df, log_vector)) / 500
 ```
 
 Make a scatterplot of y vs x; color points using the logical variable (adding color = ... inside of aes in your ggplot code should help). Make a second and third scatterplot that color points using the numeric and factor variables, respectively, and comment on the color scales.
 
 ```{r}
-scatterplot_one = ggplot(two_df, aes (x=x, y=y, color = (log_vector))) + geom_point()# The red represents when the logical vector is false, that is x + y =< 1. The blue represents when the logical vector is true, that is x + y > 1. #
+scatterplot_one = ggplot(two_df, aes (x=x, y=y, color = (log_vector))) + geom_point()
+print(scatterplot_one + ggtitle("First Scatterplot: Logical Vector")) # The red represents when the logical vector is false, that is x + y =< 1. The blue represents when the logical vector is true, that is x + y > 1. #
 
-ggplot(two_df, aes (x=x, y=y, color = (num_vector))) + geom_point() # The darker blue represents when the numeric vector is false, that is x + y =<. The lighter blue represents when the numeric factor is true, that is x + y > 1.#
+ggplot(two_df, aes (x=x, y=y, color = (num_vector))) + geom_point() # The darker blue represents when the numeric vector is false, that is x + y =<. The lighter blue represents when the numeric factor is true, that is x + y > 1.The scale is continuous since it's a numeric vector but values are either 1 or 0 (true or false) so theren't any colors in between#
 ggplot(two_df, aes (x=x, y=y, color = (fact_vector))) + geom_point() # The red represents when the factor vector is false, that is x + y =< 1. The blue represents when the factor vector is true, that is x + y > 1. #
 
-print(scatterplot_one + ggtitle("First Scatterplot: Logical Vector"))
 ggsave("scatterplot_one.pdf")
 ```
 
