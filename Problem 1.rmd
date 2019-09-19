@@ -30,3 +30,17 @@ one_df = tibble(
 )
 
 ```
+
+Try to take the mean of each variable in your dataframe. What works and what doesn’t?
+
+```{r}
+mean(pull(one_df, sample))
+
+mean(pull(one_df, vec_logical))
+
+mean(pull(one_df, chr_vector))
+
+mean(pull(one_df,vec_factor))
+```
+
+It works to take the mean of a random sample and a logical vector. However, it doesn't work to take a mean of a character vector or a factor vector. 
