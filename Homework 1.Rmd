@@ -107,8 +107,10 @@ sd(pull(two_df, x))
 Make a scatterplot of y vs x; color points using the logical variable (adding color = ... inside of aes in your ggplot code should help). Make a second and third scatterplot that color points using the numeric and factor variables, respectively, and comment on the color scales.
 
 ```{r}
-ggplot(two_df, aes (x=x, y=y, color = (log_vector))) + geom_point()
-ggsave
+
+scatterplot_one = ggplot(two_df, aes (x=x, y=y, color = (log_vector))) + geom_point()
+print(scatterplot_one + ggtitle("First Scatterplot: Logical Vector"))
+ggsave("two_df.pdf")
 
 ```
 
