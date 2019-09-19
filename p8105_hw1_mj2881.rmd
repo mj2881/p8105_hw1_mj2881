@@ -98,6 +98,7 @@ scatterplot_one = ggplot(two_df, aes (x=x, y=y, color = (log_vector))) + geom_po
 print(scatterplot_one + ggtitle("First Scatterplot: Logical Vector")) # The red represents when the logical vector is false, that is x + y =< 1. The blue represents when the logical vector is true, that is x + y > 1. #
 
 ggplot(two_df, aes (x=x, y=y, color = (num_vector))) + geom_point() # The darker blue represents when the numeric vector is false, that is x + y =<. The lighter blue represents when the numeric factor is true, that is x + y > 1.The scale is continuous since it's a numeric vector but values are either 1 or 0 (true or false) so theren't any colors in between#
+
 ggplot(two_df, aes (x=x, y=y, color = (fact_vector))) + geom_point() # The red represents when the factor vector is false, that is x + y =< 1. The blue represents when the factor vector is true, that is x + y > 1. #
 
 ggsave("scatterplot_one.pdf")
